@@ -3,12 +3,48 @@
 </head>
 
 <body>
-	{{loginButtons align="right"}}<br>
- 	{{> hello}}
+	{{loginButtons align="right"}}
+ 	{{renderRouter}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="home">
+  <h1>CashFlow!</h1>
+  {{> scorecards}}
+</template>
+
+<template name="scorecards">
+	<h3>Current</h3>
+	<ul>
+		{{#each current_scorecards}}
+			<li>
+				<a href="{{pathFor 'scorecard'}}">{{characterName}} - {{savings}} - {{createdAt}}</a>
+			</li>
+		{{/each}}
+	</ul>
+	<h3><a href="/new-scorecard">Make New</a></h3>
+</template>
+
+<template name="new-scorecard">
+	<h2> New Scorecard </h2>
+	<form>
+		<input type="text" name="characterName" placeholder="Character Name">
+		<h3>Profession: </h3>
+		{{#each professions}}
+			<div class="radio">
+				<label>
+					<input type="radio" name="profession" value="{{_id}}">{{name}}<br>
+				</label>
+			</div>
+		{{/each}}
+	</form>
+	<a href="/" class="btn">Back</a> | <button class="btn done">Done</button>
+</template>
+
+<template name="scorecard">
+	{{#with scorecard}}
+		<h2>{{characterName}}</h2>
+		<p>Profession: {{profession}}</p>
+		<p>Savings: {{savings}}</p>
+		<button class="btn next-day">Move Time To Next Day</button>
+	{{/with}}
 </template>

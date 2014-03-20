@@ -13,9 +13,11 @@ if (Meteor.isServer) {
   });
 
 
-  Meteor.publish('users-scorecards', function () {
+  Meteor.publish('users-scorecards', function (userId) {
     // later: {$or : [{"game": users current game}]}
-    return UserScoreCards.find({userId: this.userId}); 
+    if (userId == this.userId) {
+      return UserScoreCards.find({userId: this.userId}); 
+    }
   });
   var userMatch = function (userId, scorecard) {
     return userId === scorecard.userId;
@@ -26,3 +28,4 @@ if (Meteor.isServer) {
     remove: userMatch
   });
 }
+
