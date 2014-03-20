@@ -1,5 +1,5 @@
 Meteor.startup(function () {
-	var housing = 'housing', studentLoan = 'studentLoan', 
+	var housing = 'housing', studentLoan = 'student loan', 
 		car = 'car', credit = 'credit', retail = 'retail';
 	var scorecardtemplates = [
 		{

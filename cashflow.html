@@ -4,7 +4,9 @@
 
 <body>
 	{{loginButtons align="right"}}
- 	{{renderRouter}}
+ 	<div style="margin-left: 15px">
+ 		{{renderRouter}}
+ 	</div>
 </body>
 
 <template name="home">
@@ -41,10 +43,68 @@
 </template>
 
 <template name="scorecard">
+	<a href="/">Back to List of Scorecards</a>
 	{{#with scorecard}}
 		<h2>{{characterName}}</h2>
 		<p>Profession: {{profession}}</p>
-		<p>Savings: {{savings}}</p>
+		<div class="form-inline">
+			<span>Savings: {{savings}}</span>
+			<input type="text" class="savings-change-amount" placeholder="Amount ($)">
+			<button class="btn change-savings">Change savings by fixed amount</button>
+		</div>
+
+		<h4>Children: {{children}}</h4>
+		<button class="more-children">I Have a New Child!</button>
+
+		<h4>Stocks</h4>
+		{{#each stocks}}
+			<div class="form-inline">
+				<span>{{shares}} shares of {{ticker}} at original cost of ${{price}} each, generating ${{dividend}} each in income</span>
+				<input type="text" class="selling-price" placeholder="Selling price ($)">
+				<button class="btn sell-stock">Sell</button>
+			</div>
+		{{/each}}
+		<div class="form-inline">
+			<span>Buy new stock</span>
+			<input type="text" class="stock-ticker" placeholder="ticker">
+			<input type="text" class="stock-dividend" placeholder="monthly dividend">
+			<input type="text" class="stock-price" placeholder="cost ($)">
+			<input type="text" class="stock-shares" placeholder="number of shares">
+			<button class="btn buy-new-stock">Buy</button>
+		</div>
+
+		<h4>Real Estate / Businesses</h4>
+		{{#each realEstate}}
+			<div class="form-inline">
+				<span>{{description}} with downpayment of ${{downpayment}} and mortgage of ${{mortgage}}, generating ${{cashflow}} in income</span>
+				<input type="text" class="selling-price" placeholder="Selling price ($)">
+				<button class="btn sell-real-estate">Sell</button>
+			</div>
+		{{/each}}
+		<div class="form-inline">
+			<span>Buy real estate</span>
+			<input type="text" class="real-estate-description" placeholder="description">
+			<input type="text" class="real-estate-downpayment" placeholder="downpayment ($)">
+			<input type="text" class="real-estate-mortgage" placeholder="mortgage ($)">
+			<input type="text" class="real-estate-cashflow" placeholder="cashflow ($)">
+			<button class="btn buy-real-estate">Buy</button>
+		</div>
+
+		<h4>Debts</h4>
+		{{#each debts}}
+			<div class="form-inline">
+				<span>{{name}} -- ${{amount}}, costing ${{payment}}/mo</span>
+				<button class="btn payoff-debt">Pay Off Debt</button>
+			</div>
+		{{/each}}
+		<div class="form-inline">
+			<span>New debts</span>
+			<input type="text" class="debt-name" placeholder="description">
+			<input type="text" class="debt-amount" placeholder="amount ($)">
+			<input type="text" class="debt-payment" placeholder="payment ($)">
+			<button class="btn new-debt">Add the new debt</button>
+		</div>
+
 		<button class="btn next-day">Move Time To Next Day</button>
 	{{/with}}
 </template>
